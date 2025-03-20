@@ -6,6 +6,10 @@ import random  # Simulating sensor data
 THINGSPEAK_API_KEY = "3WGB6MU7A6IDKH9Y"
 THINGSPEAK_URL = "https://api.thingspeak.com/update"
 
+# Manually Input Location (Replace with actual coordinates)
+latitude = "28.7041"  # Example: New Delhi, India
+longitude = "77.1025"
+
 while True:
     # Simulated Sensor Data (Replace with real sensor readings)
     temperature = round(random.uniform(36.0, 38.5), 2)  # Example: 36.0°C to 38.5°C
@@ -15,14 +19,16 @@ while True:
     data = {
         "api_key": THINGSPEAK_API_KEY,
         "field1": temperature,  # Temperature Data
-        "field2": heart_rate    # Heart Rate Data
+        "field2": heart_rate,   # Heart Rate Data
+        "field3": latitude,     # Latitude Data
+        "field4": longitude     # Longitude Data
     }
 
     # Send Data to ThingSpeak
     response = requests.post(THINGSPEAK_URL, data=data)
 
     if response.status_code == 200:
-        print(f"Data sent successfully! Temperature: {temperature}°C, Heart Rate: {heart_rate} BPM")
+        print(f"Data sent successfully! Temperature: {temperature}°C, Heart Rate: {heart_rate} BPM, Location: ({latitude}, {longitude})")
     else:
         print("Error sending data:", response.status_code, response.text)
 
